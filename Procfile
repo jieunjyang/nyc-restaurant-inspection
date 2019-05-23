@@ -1,1 +1,1 @@
-web: restuarant:app
+web: app:app
