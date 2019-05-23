@@ -1,1 +1,1 @@
-web: gunicorn nyc-restaurant-inspection:app
+web: restuarant:app
