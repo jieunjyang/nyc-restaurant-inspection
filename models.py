@@ -25,9 +25,6 @@ class Restaurants(db.Model):
         self.phone = phone
         self.cuisine_desc = cuisine_desc
 
-    def __repr__(self):
-        return '<restaurant_id {}>'.format(self.restaurant_id)
-
     def to_json(self):
         return {
             'restaurant_id': self.restaurant_id,
@@ -68,9 +65,6 @@ class Inspections(db.Model):
         self.grade_date = grade_date
         self.record_date = record_date
         self.inspection_type = inspection_type
-
-    def __repr__(self):
-        return '<restaurant_id {}>'.format(self.restaurant_id)
 
     def to_json(self):
         return {

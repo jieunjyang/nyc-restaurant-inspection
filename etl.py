@@ -20,6 +20,7 @@ restaurant_cols = ["CAMIS", "DBA", "BORO", "BUILDING", "STREET", "ZIPCODE",
 inspection_cols = ["CAMIS","INSPECTION DATE", "ACTION", "VIOLATION CODE", "VIOLATION DESCRIPTION",
                     "CRITICAL FLAG", "SCORE", "GRADE", "GRADE DATE", "RECORD DATE", "INSPECTION TYPE"]
 
+
 # Split dataframe into restaurants and inspection details
 restaurants_df = rest_insp_df[restaurant_cols].drop_duplicates()
 # Remove rows that have duplicate ids.
