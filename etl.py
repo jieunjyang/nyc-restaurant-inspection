@@ -20,7 +20,7 @@ restaurant_cols = ["CAMIS", "DBA", "BORO", "BUILDING", "STREET", "ZIPCODE",
 inspection_cols = ["CAMIS","INSPECTION DATE", "ACTION", "VIOLATION CODE", "VIOLATION DESCRIPTION",
                     "CRITICAL FLAG", "SCORE", "GRADE", "GRADE DATE", "RECORD DATE", "INSPECTION TYPE"]
 
-restaurants_df = rest_insp_df[restaurant_cols]
+restaurants_df = rest_insp_df[restaurant_cols].drop_duplicates()
 dup_ids = set(restaurants_df.groupby(['CAMIS']).filter(lambda x: len(x) > 1).index)
 restaurants_df = restaurants_df.drop(dup_ids.pop(), axis=0).fillna('')
 
