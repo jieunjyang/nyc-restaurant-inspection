@@ -4,52 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-class RestaurantInspections(db.Model):
-    __tablename__= 'restaurant_inspections'
-    id = db.Column(db.Integer, primary_key=True)
-    restaurant_id = db.Column(db.Integer)
-    name = db.Column(db.String(), nullable=True)
-    boro = db.Column(db.String())
-    building = db.Column(db.String(), nullable=True)
-    street = db.Column(db.String(), nullable=True)
-    zipcode = db.Column(db.String(), nullable=True)
-    phone = db.Column(db.String(), nullable=True)
-    cuisine_desc = db.Column(db.String())
-    inspection_date = db.Column(db.String())
-    action = db.Column(db.String(), nullable=True)
-    violation_code = db.Column(db.String(), nullable=True)
-    violation_desc = db.Column(db.String(), nullable=True)
-    critical_flag = db.Column(db.String())
-    score = db.Column(db.String(), nullable=True)
-    grade = db.Column(db.String(), nullable=True)
-    grade_date = db.Column(db.String(), nullable=True)
-    record_date = db.Column(db.Date())
-    inspection_type = db.Column(db.String(), nullable=True)
-
-    def __init__(self, restaurant_id, name, boro, building, street, zipcode,
-                    phone, cuisine_desc, inspection_date, action, violation_code,
-                    violation_desc, critical_flag, score, grade, grade_date,
-                    record_date, inspection_type):
-        self.restaurant_id = restaurant_id
-        self.name = name
-        self.boro = boro
-        self.building = building
-        self.street = street
-        self.zipcode = zipcode
-        self.phone = phone
-        self.cuisine_desc = cuisine_desc
-        self.inspection_date = inspection_date
-        self.action = action
-        self.violation_code = violation_code
-        self.violation_desc = violation_desc
-        self.critical_flag = critical_flag
-        self.score = score
-        self.grade = grade
-        self.grade_date = grade_date
-        self.record_date = record_date
-        self.inspection_type = inspection_type
-
-
 class Restaurants(db.Model):
     __tablename__ = 'restaurants'
     restaurant_id = db.Column(db.Integer, primary_key=True)
