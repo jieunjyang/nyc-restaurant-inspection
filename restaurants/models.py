@@ -1,15 +1,8 @@
-from app import db
+from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
 
-class BaseModel(db.Model):
-    """Base data model for all objects"""
-    __abstract__ = True
-
-    def __init__(self, *args):
-        super().__init__(*args)
-
-
-class Restaurants(BaseModel, db.Model):
+class Restaurants(db.Model):
     __tablename__ = 'restaurants'
 
     restaurant_id = db.Column(db.Integer, primary_key=True)
@@ -31,20 +24,22 @@ class Restaurants(BaseModel, db.Model):
         self.phone = phone
         self.cuisine_desc = cuisine_desc
 
+    def __repr__(self):
+        return '<restaurant_id {}>'.format(self.restaurant_id)
 
-class Inspections(BaseModel, db.Model):
+
+class Inspections(db.Model):
     __tablename__ = 'inspections'
-
-    restaurant_id = db.Column(db.Integer, foreign_key=True)
-    inspection_date = db.Column()
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.restaurant_id'), primary_key=True)
+    inspection_date = db.Column(db.Date())
     action = db.Column(db.String())
     violation_code = db.Column(db.String())
     violation_desc = db.Column(db.String())
     critical_flag = db.Column(db.String())
     score = db.Column(db.Float())
     grade = db.Column(db.String())
-    grade_date = db.Column()
-    record_date = db.Column()
+    grade_date = db.Column(db.Date())
+    record_date = db.Column(db.Date())
     inspection_type = db.Column(db.String())
 
     def __init__(self, restaurant_id, inspection_date, action, violation_code, violation_desc, critical_flag, score, grade, grade_date, record_date, inspection_type):
@@ -59,3 +54,6 @@ class Inspections(BaseModel, db.Model):
         self.grade_date = grade_date
         self.record_date = record_date
         self.inspection_type = inspection_type
+
+    def __repr__(self):
+        return '<restaurant_id {}>'.format(self.restaurant_id)
