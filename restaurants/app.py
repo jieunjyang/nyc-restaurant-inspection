@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from models import db
 
@@ -19,6 +19,18 @@ from models import Restaurants, Inspections
 def hello():
     return "Hello World."
 
+@app.route("/get_all", methods=['GET'])
+def get_restaurant_list():
+    try:
+        # Restaurants: restaurant_id, name, cuisine_desc
+        # Inspections:
+        #
+        #result = db.engine.execute("SELECT ")
+        thai_food = Restaurants.query.filter_by(cuisine_desc='Thai').all()
+        print(thai_food)
+        return jsonify(thai_food.to_json())
+    except Exception as e:
+        return(str(e))
 
 if __name__ == '__main__':
     app.run()
