@@ -12,6 +12,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 
+from models import Restaurants, Inspections
+
+
 @app.route("/")
 def hello():
     return "Hello World."
