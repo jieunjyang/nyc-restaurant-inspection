@@ -2,7 +2,7 @@ import os
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from models import db
-
+from sqlalchemy import text
 
 app = Flask(__name__)
 
@@ -22,13 +22,18 @@ def hello():
 @app.route("/get_all", methods=['GET'])
 def get_restaurant_list():
     try:
-        # Restaurants: restaurant_id, name, cuisine_desc
-        # Inspections:
-        #
-        #result = db.engine.execute("SELECT ")
-        thai_food = Restaurants.query.filter_by(cuisine_desc='Thai').all()
-        print(thai_food)
-        return jsonify(thai_food.to_json())
+        sql = text('''SELECT r.restaurant_id, r.name, g.grade,g.mostrecent
+                    FROM restaurants r
+                    LEFT JOIN (
+                        SELECT i.restaurant_id, i.grade, MAX(i.inspection_date) AS mostrecent
+                        FROM inspections i
+                        WHERE i.grade in ('A','B')
+                        GROUP BY i.restaurant_id, i.grade
+                    ) g ON r.restaurant_id = g.restaurant_id
+                    WHERE r.cuisine_desc='Thai';''')
+        thai_restaurants = db.engine.execute(sql)
+        return_json = "restaurant_id': {}, 'name': {}, 'grade': {}, 'most_recent_inspect_date': {}"
+        return jsonify([return_json.format(r[0],r[1],r[2],r[3]) for r in thai_restaurants])
     except Exception as e:
         return(str(e))
 
