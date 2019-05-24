@@ -29,36 +29,36 @@ For this GET request, I execute the following SQL query:
 ## Run locally:
 1. Git clone the repo into your local environment:
 
-        ```git clone https://github.com/jieunjyang/nyc-restaurant-inspection.git```
+```git clone https://github.com/jieunjyang/nyc-restaurant-inspection.git```
 
 2. Set up virtualenv: 
 
-        ```virtualenv venv```
+```virtualenv venv```
 
-        ```source venv/bin/activate```
+```source venv/bin/activate```
 
-        ```source venv/bin/activate```
+```source venv/bin/activate```
 
-        ```pip install -r requirements.txt```
+```pip install -r requirements.txt```
 
 
 3. Assuming you already have postgresql installed, set up a db.
 
-        ``` sudo -u username createdb db_name ```
+``` sudo -u username createdb db_name ```
 
-        ```python manage.py db init```
+```python manage.py db init```
 
-        ```python manage.py db migrate```
+```python manage.py db migrate```
 
-        ```python manage.py db upgrade```
+```python manage.py db upgrade```
 
 You can load the db by running the etl script:
 
-        ```python etl.py```
+```python etl.py```
 
 4. Then run the server.
 
-        ```python manage.py runserver```
+```python manage.py runserver```
 
 ## Schema Design:
 
