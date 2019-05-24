@@ -26,7 +26,7 @@ def get_all_restaurants():
     try:
         restaurants = Restaurants.query.all()
 
-        return jsonify([r.to_json() for r in restaurants]), 201
+        return jsonify([r.to_json() for r in restaurants]), 200
 
     except Exception as e:
         return e
@@ -51,7 +51,7 @@ def get_restaurants_by_category(cuisine):
         return jsonify([{"restaurant_id": str(r[0]),
                             "name": str(r[1]),
                             "grade": str(r[2]),
-                            "inspect_date": str(r[3])} for r in thai_restaurants]), 201
+                            "inspect_date": str(r[3])} for r in thai_restaurants]), 200
 
     except Exception as e:
         return e

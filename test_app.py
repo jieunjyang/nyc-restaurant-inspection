@@ -1,26 +1,28 @@
-import unittest
 import sys,os
+import unittest
+
 import app as app
-from models import db, Restaurants
 
 
 class AppTestcase(unittest.TestCase):
     def setUp(self):
         self.app = app.app.test_client()
+        self.assertIsNotNone(app)
 
     def test_index_route(self):
         response = self.app.get("/")
         self.assertEqual(response.status_code, 200)
-        assert b'Hello World.' in response.data
+        self.assertIn(b'Hello World.', response.data)
 
     def test_get_all_restaurants(self):
-        restaurant = Restaurants(123, 'name_of_rest', 'boro1', 'building1', 'street1', '12345', '1234567890', 'Thai')
         response = self.app.get("/api/v1/restaurants")
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.data)
 
     def test_get_restaurants_by_category(self):
         response = self.app.get("/api/v1/restaurants/Thai")
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.data)
 
 
 def suite():
